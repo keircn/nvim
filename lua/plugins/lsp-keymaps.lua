@@ -66,7 +66,18 @@ return {
 
   {
     "stevearc/conform.nvim",
-    optional = true,
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        "<leader>cF",
+        function()
+          require("conform").format({ formatters = { "injected" } })
+        end,
+        mode = { "n", "v" },
+        desc = "Format Injected Langs",
+      },
+    },
     opts = {
       formatters_by_ft = {
         go = { "gofumpt", "goimports" },
@@ -79,8 +90,27 @@ return {
         bash = { "shfmt" },
         sh = { "shfmt" },
         fish = { "fish_indent" },
+        markdown = { "prettier" },
+        yaml = { "prettier" },
+        css = { "prettier" },
+        html = { "prettier" },
+        lua = { "stylua" },
       },
     },
+  },
+
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
+        "prettier",
+        "stylua", 
+        "shfmt",
+        "gofumpt",
+        "goimports",
+      })
+    end,
   },
 
   {
@@ -96,8 +126,8 @@ return {
         bash = { "shellcheck" },
         sh = { "shellcheck" },
         json = { "jsonlint" },
+        markdown = { "markdownlint-cli2" },
       },
     },
   },
 }
-
