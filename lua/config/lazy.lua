@@ -18,6 +18,15 @@ require("lazy").setup({
   spec = {
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     { import = "plugins" },
+    {
+      "keircn/racc.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require("racc").setup({
+          register = "+",
+        })
+      end,
+    },
   },
   defaults = {
     lazy = false,
