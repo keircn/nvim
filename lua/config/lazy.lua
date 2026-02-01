@@ -18,6 +18,7 @@ require("lazy").setup({
   spec = {
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     { import = "plugins" },
+    { "wakatime/vim-wakatime", lazy = false },
     {
       "keircn/racc.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
